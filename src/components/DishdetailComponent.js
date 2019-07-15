@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
-import {Card,CardImg,CardBody,CardText,CardTitle} from 'reactstrap';
+import {Card,CardImg,CardBody,CardText,CardTitle,Breadcrumb,BreadcrumbItem} from 'reactstrap';
+import {Link} from "react-router-dom";
 
 class Dishdetail extends Component{
-    renderDish(dish){
+    RenderDish(dish){
         if (dish!=null){
             return(
                 <div class="col-12 col-md-5 m-1">
@@ -28,7 +29,7 @@ class Dishdetail extends Component{
         }
 
     }
-    renderComments(comments){
+    RenderComments(comments){
         if (comments==null){
             return(<div></div>)
         }
@@ -62,9 +63,26 @@ class Dishdetail extends Component{
         }
         else{
             return(
+                <div className="container">
                 <div className="row">
-                    {this.renderDish(dishdetail)}
-                    {this.renderComments(dishdetail.comments)}
+                    <Breadcrumb>
+                    <BreadcrumbItem><Link to='/menu'>Menu</Link>
+                    </BreadcrumbItem>
+                    <BreadcrumbItem active>{dishdetail}
+                    </BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{this.props.dish.name}</h3>
+                    </div>
+                    </div>
+                    <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderDish dish={dishdetail} />
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        <RenderComments comments={this.props.comment} />
+                    </div>
+                </div>
                 </div>
             )
         }
